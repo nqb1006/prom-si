@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VLU PROM NIGHT 2025 - Dạ tiệc ánh sao</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="banner">
+    <img src="banner.jpg" alt="VLU Prom Night banner">
+    <h1>VLU PROM NIGHT 2025 – Dạ tiệc ánh sao</h1>
+    <p>18:00 ngày 15/8/2025<br>Dresscode: Suit & Váy dạ hội tự do</p>
+    <button class="btn" onclick="document.getElementById('form').scrollIntoView()">Mua vé ngay</button>
+    <div class="countdown" id="countdown"></div>
+  </header>
+
+  <section>
+    <h2>Thông tin sự kiện</h2>
+    <p><strong>Thời gian:</strong> 18:00 ngày 15/8/2025</p>
+    <p><strong>Địa điểm:</strong> 69/68 Đặng Thùy Trâm, P.13, Q.Bình Thạnh</p>
+    <p><strong>Đối tượng:</strong> Sinh viên đã tốt nghiệp</p>
+    <p><strong>Giá vé:</strong> Đơn: 250.000đ | Đôi: 450.000đ</p>
+    <p><strong>Quyền lợi:</strong> Buffet trà bánh, sân khấu biểu diễn ca sĩ Trúc Nhân</p>
+    <div class="ticket-count" id="tickets">Vé đơn còn: 200 | Vé đôi còn: 100</div>
+  </section>
+
+  <section id="form">
+    <h2>Đăng ký & Thanh toán</h2>
+    <form>
+      <input type="text" placeholder="Họ tên" required>
+      <input type="text" placeholder="Mã số sinh viên" required>
+      <input type="email" placeholder="Email" required>
+      <select required>
+        <option value="">Chọn loại vé</option>
+        <option>Vé đơn - 250.000đ</option>
+        <option>Vé đôi - 450.000đ</option>
+      </select>
+      <input type="text" placeholder="Mã giao dịch chuyển khoản" required>
+      <button class="btn" type="submit">Gửi đăng ký</button>
+    </form>
+    <p><strong>Thông tin chuyển khoản:</strong><br>Ngân hàng Shinhan Bank<br>Số tài khoản: VL + MSSV (VD: VL207QT01234)</p>
+    <p>Nội dung chuyển khoản: họ tên + MSSV</p>
+    <p style="color: red">⚠️ Bạn chỉ được xác nhận vé khi BTC kiểm tra đủ điều kiện và có chuyển khoản thành công.</p>
+  </section>
+
+  <section>
+    <h2>Liên hệ</h2>
+    <p>Email hỗ trợ: mail.vanlanguni.vn</p>
+    <p><a href="https://www.facebook.com/truongdaihocvanlang/?locale=vi_VN" style="color: #ffcc00">Facebook sự kiện</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 VLU Prom Night Team</p>
+  </footer>
+
+  <script>
+    const eventDate = new Date("2025-08-15T18:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+    const ticketsEl = document.getElementById("tickets");
+    let single = 200, couple = 100;
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+      if (distance < 0) {
+        countdownEl.innerHTML = "Sự kiện đã diễn ra";
+        return;
+      }
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((distance % (1000 * 60)) / 1000);
+      countdownEl.innerHTML = `Còn lại: ${d} ngày ${h} giờ ${m} phút ${s} giây`;
+    }
+    setInterval(updateCountdown, 1000);
+
+    // Simulate ticket sales (for preview only)
+    setInterval(() => {
+      if (single > 0) single--;
+      if (couple > 0 && single % 5 === 0) couple--;
+      ticketsEl.innerText = `Vé đơn còn: ${single} | Vé đôi còn: ${couple}`;
+    }, 10000);
+  </script>
+</body>
+</html>
